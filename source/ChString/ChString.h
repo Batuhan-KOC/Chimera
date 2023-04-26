@@ -1,6 +1,7 @@
 #ifndef CHSTRING
 #define CHSTRING
 
+#include <iostream>
 #include <string>
 #include <list>
 
@@ -69,6 +70,16 @@ public:
      * @return A reference to the string object.
      */
     ChString &operator=(ChString &&other) noexcept;
+
+    /**
+    * @brief Overloads the << operator to output a ChString object to an output stream.
+    * 
+    * @param os The output stream to write to.
+    * @param str The ChString object to output.
+    * 
+    * @return A reference to the output stream after the ChString has been written to it.
+    */
+    friend std::ostream& operator<<(std::ostream& os, const ChString& str);
 
     /**
      * @brief Conversion operator to implicitly convert ChVector to std::string.

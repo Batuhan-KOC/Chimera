@@ -49,6 +49,11 @@ ChString &ChString::operator=(ChString &&other) noexcept
     return *this;
 }
 
+std::ostream& operator<<(std::ostream& os, const ChString& str) {
+    os << str.data_;
+    return os;
+}
+
 ChString::operator std::string &()
 {
     return data_;
