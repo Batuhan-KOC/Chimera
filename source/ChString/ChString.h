@@ -224,14 +224,6 @@ public:
     ChString concat(const ChString& str) const;
 
     /**
-    * @brief Concatenates the given std::string object to the current object and returns the result as a new ChString object.
-    *
-    * @param str The std::string object to concatenate to the current object.
-    * @return A new ChString object that is the result of concatenating the given string to the current object.
-    */
-    ChString concat(const std::string& str) const;
-
-    /**
     * @brief Returns a new ChString object that is a substring of the current object, starting from the given start position and with the given size.
     *
     * @param start The starting index of the substring.
@@ -291,7 +283,7 @@ public:
     * @param str The string to remove.
     * @return A new string with the first occurrence of `str` removed, or the original string if `str` was not found.
     */
-    ChString ChString::removeFirst(std::string str) const;
+    ChString ChString::removeFirst(const char* str) const;
 
     /**
     * @brief Remove the last occurrence of the specified string from this string.
@@ -307,7 +299,7 @@ public:
     * @param str The string to remove.
     * @return A new string with the last occurrence of `str` removed, or the original string if `str` was not found.
     */
-    ChString ChString::removeLast(std::string str) const;
+    ChString ChString::removeLast(const char* str) const;
 
     /**
     * @brief Returns the first character of the ChString
@@ -353,7 +345,7 @@ public:
      * @param isCaseSensitive Whether to perform a case-sensitive search. Default is false.
      * @return true if the string contains the value, false otherwise.
      */
-    bool contains(const std::string& value, bool isCaseSensitive = false) const;
+    bool contains(const char* value, bool isCaseSensitive = false) const;
 
     /**
      * @brief Count the number of occurrences of a given value in the string.
@@ -371,7 +363,7 @@ public:
      * @param isCaseSensitive Whether to perform a case-sensitive search. Default is false.
      * @return The number of occurrences of the value in the string.
      */
-    int count(const std::string& value, bool isCaseSensitive = false) const;
+    int count(const char* value, bool isCaseSensitive = false) const;
 
     /**
      * @brief Returns the lower case version of the ChString
@@ -403,12 +395,12 @@ public:
     bool beginsWith(const ChString& str) const;
 
     /**
-     * @brief Check whether the ChString object begins with the specified std::string
+     * @brief Check whether the ChString object begins with the specified char*
      * 
-     * @param str The std::string to check for at the beginning of the current ChString object
-     * @return true if the current ChString object begins with the specified std::string, false otherwise
+     * @param str The char* to check for at the beginning of the current ChString object
+     * @return true if the current ChString object begins with the specified char*, false otherwise
      */
-    bool beginsWith(const std::string& str) const;
+    bool beginsWith(const char* str) const;
 
     /**
      * @brief Check whether the ChString object begins with the specified character
@@ -427,12 +419,12 @@ public:
     bool endsWith(const ChString& str) const;
 
     /**
-     * @brief Check whether the ChString object ends with the specified std::string
+     * @brief Check whether the ChString object ends with the specified char*
      * 
-     * @param str The std::string to check for at the end of the current ChString object
-     * @return true if the current ChString object ends with the specified std::string, false otherwise
+     * @param str The char* to check for at the end of the current ChString object
+     * @return true if the current ChString object ends with the specified char*, false otherwise
      */
-    bool endsWith(const std::string& str) const;
+    bool endsWith(const char* str) const;
 
     /**
      * @brief Check whether the ChString object ends with the specified character
@@ -479,16 +471,6 @@ public:
      * @return A std::list<ChString> containing the substrings of the ChString object
      */
     std::list<ChString> split(const ChString&seperator, bool keepEmptyParts = false , bool caseSensitive = false) const;
-
-    /**
-     * @brief Split the ChString object into a list of substrings using the specified separator
-     * 
-     * @param separator The std::string to use as a separator
-     * @param keepEmptyParts If true, empty substrings will be included in the output list
-     * @param caseSensitive If true, the separator will be matched case-sensitively
-     * @return A std::list<ChString> containing the substrings of the ChString object
-     */
-    std::list<ChString> split(const std::string&seperator, bool keepEmptyParts = false , bool caseSensitive = false) const;
 
     /**
      * @brief Split the ChString object into a list of substrings using the specified separator

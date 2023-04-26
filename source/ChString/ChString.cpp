@@ -272,11 +272,6 @@ ChString ChString::concat(const ChString &str) const
     return ChString(data_ + str.getData());
 }
 
-ChString ChString::concat(const std::string &str) const
-{
-    return ChString(data_ + str);
-}
-
 ChString ChString::substring(int start, int size) const
 {
     size_t size_ = static_cast<size_t>(size);
@@ -333,10 +328,9 @@ ChString ChString::removeFirst(ChString str) const
     return result;
 }
 
-ChString ChString::removeFirst(std::string str) const
+ChString ChString::removeFirst(const char *str) const
 {
-    ChString chStr(str);
-    return removeFirst(chStr);
+    return removeFirst(ChString(str));
 }
 
 ChString ChString::removeLast(ChString str) const
@@ -351,10 +345,9 @@ ChString ChString::removeLast(ChString str) const
     return result;
 }
 
-ChString ChString::removeLast(std::string str) const
+ChString ChString::removeLast(const char *str) const
 {
-    ChString chStr(str);
-    return removeLast(chStr);
+    return removeLast(ChString(str));
 }
 
 char ChString::first() const
@@ -401,16 +394,9 @@ bool ChString::contains(const ChString &value, bool isCaseSensitive) const
     return str.find(subStr) != std::string::npos;
 }
 
-bool ChString::contains(const std::string &value, bool isCaseSensitive) const
+bool ChString::contains(const char *value, bool isCaseSensitive) const
 {
-    std::string str = data_;
-    std::string subStr = value;
-    if (!isCaseSensitive)
-    {
-        std::transform(str.begin(), str.end(), str.begin(), ::tolower);
-        std::transform(subStr.begin(), subStr.end(), subStr.begin(), ::tolower);
-    }
-    return str.find(subStr) != std::string::npos;
+    return contains(ChString(value), isCaseSensitive);
 }
 
 int ChString::count(const ChString &value, bool isCaseSensitive) const
@@ -432,23 +418,9 @@ int ChString::count(const ChString &value, bool isCaseSensitive) const
     return count;
 }
 
-int ChString::count(const std::string &value, bool isCaseSensitive) const
+int ChString::count(const char *value, bool isCaseSensitive) const
 {
-    std::string str = data_;
-    std::string subStr = value;
-    int count = 0;
-    size_t pos = 0;
-    if (!isCaseSensitive)
-    {
-        std::transform(str.begin(), str.end(), str.begin(), ::tolower);
-        std::transform(subStr.begin(), subStr.end(), subStr.begin(), ::tolower);
-    }
-    while ((pos = str.find(subStr, pos)) != std::string::npos)
-    {
-        ++count;
-        pos += subStr.length();
-    }
-    return count;
+    return count(ChString(value), isCaseSensitive);
 }
 
 ChString ChString::toLower() const
@@ -494,7 +466,7 @@ bool ChString::beginsWith(const ChString &str) const
     return data_.find(str.data_) == 0;
 }
 
-bool ChString::beginsWith(const std::string &str) const
+bool ChString::beginsWith(const char* str) const
 {
     return data_.find(str) == 0;
 }
@@ -517,13 +489,9 @@ bool ChString::endsWith(const ChString &str) const
     return data_.compare(data_.length() - str.data_.length(), str.data_.length(), str.data_) == 0;
 }
 
-bool ChString::endsWith(const std::string &str) const
-{
-    if (data_.length() < str.length())
-    {
-        return false;
-    }
-    return data_.compare(data_.length() - str.length(), str.length(), str) == 0;
+bool ChString::endsWith(const char* str) const
+{   
+    return endsWith(ChString(str));
 }
 
 bool ChString::endsWith(char ch) const
@@ -607,11 +575,6 @@ std::list<ChString> ChString::split(const ChString &separator, bool keepEmptyPar
         result.push_back(*this);
     }
     return result;
-}
-
-std::list<ChString> ChString::split(const std::string &separator, bool keepEmptyParts, bool caseSensitive) const
-{
-    return split(ChString(separator), keepEmptyParts, caseSensitive);
 }
 
 std::list<ChString> ChString::split(char separator, bool keepEmptyParts, bool caseSensitive) const
